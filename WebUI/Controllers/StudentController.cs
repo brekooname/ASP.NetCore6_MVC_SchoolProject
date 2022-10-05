@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Repository.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models.Concrete;
@@ -7,17 +8,16 @@ namespace WebUI.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly SchoolDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StudentController(SchoolDbContext db)
+        public StudentController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var studentList = await _db.Students.ToListAsync();
-
+            var studentList = _unitOfWork.StudentRepository.GetAll();
             return View(studentList);
         }
         #region Add => GET - POST
@@ -30,8 +30,8 @@ namespace WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _db.Students.AddAsync(student);
-                await _db.SaveChangesAsync();
+                _unitOfWork.StudentRepository.Add(student);
+                await _unitOfWork.SaveAsync();
             }
             return RedirectToAction(nameof(Index));
         }
@@ -39,32 +39,32 @@ namespace WebUI.Controllers
 
 
         #region Edit => GET - POST
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
-            var student = await _db.Students.FirstOrDefaultAsync(s => s.Id == id);
+            var student = _unitOfWork.StudentRepository.GetFirstOrDefault(s => s.Id == id);
             return View(student);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(Student student)
         {
-            _db.Students.Update(student);
-            await _db.SaveChangesAsync();
+            _unitOfWork.StudentRepository.Update(student);
+            await _unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
         #endregion
 
 
         #region Delete => GET - POST
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var student = await _db.Students.FirstOrDefaultAsync(s => s.Id == id);
+            var student = _unitOfWork.StudentRepository.GetFirstOrDefault(s => s.Id == id);
             return View(student);
         }
         [HttpPost]
         public async Task<IActionResult> Delete(Student student)
         {
-            _db.Students.Remove(student);
-            await _db.SaveChangesAsync();
+            _unitOfWork.StudentRepository.Remove(student);
+            await _unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
         #endregion
