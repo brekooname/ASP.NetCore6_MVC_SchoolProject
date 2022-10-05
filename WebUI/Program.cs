@@ -1,4 +1,6 @@
 using DataAccess;
+using DataAccess.Repository.Abstract;
+using DataAccess.Repository.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<SchoolDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDbConnection"));
-});
+builder.Services.AddDbContext<SchoolDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("SchoolDbConnection")));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
