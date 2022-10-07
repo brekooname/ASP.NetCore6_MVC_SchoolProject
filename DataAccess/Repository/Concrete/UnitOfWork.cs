@@ -11,9 +11,13 @@ namespace DataAccess.Repository.Concrete
         {
             _db = db;
             StudentRepository = new StudentRepository(_db);
+            TeacherRepository = new TeacherRepository(_db);
+            CourseRepository = new CourseRepository(_db);
         }
 
         public IStudentRepository StudentRepository{ get; private set; }
+        public ITeacherRepository TeacherRepository{ get; private set; }
+        public ICourseRepository CourseRepository{ get; private set; }
 
         public async Task SaveAsync()
         {
