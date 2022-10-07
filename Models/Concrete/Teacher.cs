@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Core.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Concrete
 {
-    public class Teacher
+    public class Teacher : IEntity
     {
         public Teacher()
         {

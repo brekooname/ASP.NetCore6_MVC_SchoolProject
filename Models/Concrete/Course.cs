@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Core.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Concrete
 {
-    public class Course
+    public class Course : IEntity
     {
         public Course()
         {

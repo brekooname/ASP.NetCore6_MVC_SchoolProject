@@ -1,6 +1,8 @@
-﻿namespace Models.Concrete
+﻿using Core.Entities;
+
+namespace Models.Concrete
 {
-    public class ExamGrade
+    public class ExamGrade : IEntity
     {
         public int Id { get; set; }
         public string? Mid1 { get; set; }
