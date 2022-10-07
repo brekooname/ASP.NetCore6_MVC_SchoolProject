@@ -14,5 +14,10 @@
         public ICollection<Teacher> Teachers { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<ExamGrade> ExamGrades { get; set; }
+
+        public override string? ToString()
+        {
+            return $"{Name} {Code}";
+        }
     }
 }

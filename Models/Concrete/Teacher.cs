@@ -1,4 +1,7 @@
-﻿namespace Models.Concrete
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+
+namespace Models.Concrete
 {
     public class Teacher
     {
@@ -12,6 +15,9 @@
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public int CourseId { get; set; }
+
+        [ValidateNever]
         public Course Course { get; set; }
         public ICollection<ExamGrade> ExamGrades { get; set; }
         public ICollection<Student> Students { get; set; }
