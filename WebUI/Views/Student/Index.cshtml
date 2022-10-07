@@ -4,41 +4,44 @@
     ViewData["Title"] = "Student List";
 }
 
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-info">Student List</h2>
+<br />
+<div class="card">
+    <div class="container p-6">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-info">Student List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Student" asp-action="Add" class="btn btn-info">Add New Student</a>
+            </div>
         </div>
-        <div class="col-6 text-end">
-            <a asp-controller="Student" asp-action="Add" class="btn btn-info">Add New Student</a>
-        </div>
+        <br />
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:10%">Student No</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:20%">Last Name</th>
+                    <th style="width:15%">Username</th>
+                    <th style="width:15%">Password</th>
+                    <th style="width:5%">Edit</th>
+                    <th style="width:5%">Delete</th>
+                </tr>
+            </thead>
+
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.StudentNo</td>
+                    <td>@s.Name</td>
+                    <td>@s.LastName</td>
+                    <td>@s.UserName</td>
+                    <td>@s.Password</td>
+                    <td><a href="/Student/Edit/@s.Id" class="btn btn-primary" style="width:20px"></a></td>
+                    <td><a href="/Student/Delete/@s.Id" class="btn btn-danger" style="width:20px"></a></td>
+                </tr>
+            }
+        </table>
     </div>
-    <br />
-
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th style="width:10%">Student No</th>
-                <th style="width:20%">Name</th>
-                <th style="width:20%">Last Name</th>
-                <th style="width:15%">Username</th>
-                <th style="width:15%">Password</th>
-                <th style="width:5%">Edit</th>
-                <th style="width:5%">Delete</th>
-            </tr>
-        </thead>
-
-        @foreach (var s in Model)
-        {
-            <tr>
-                <td>@s.StudentNo</td>
-                <td>@s.Name</td>
-                <td>@s.LastName</td>
-                <td>@s.UserName</td>
-                <td>@s.Password</td> 
-                <td><a href="/Student/Edit/@s.Id" class="btn btn-primary" style="width:20px"></a></td>
-                <td><a href="/Student/Delete/@s.Id" class="btn btn-danger" style="width:20px"></a></td>
-            </tr>
-        }
-    </table>
 </div> 
