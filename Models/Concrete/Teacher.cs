@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Concrete
 {
@@ -21,5 +22,9 @@ namespace Models.Concrete
         public Course Course { get; set; }
         public ICollection<ExamGrade> ExamGrades { get; set; }
         public ICollection<Student> Students { get; set; }
+
+        [NotMapped]
+        public string FullName { get => $"{Name} {LastName}"; }
     }
 }
+

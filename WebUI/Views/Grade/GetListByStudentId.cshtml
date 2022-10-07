@@ -1,0 +1,47 @@
+﻿@model ExamGradeByStudentIdViewModel
+
+@{
+    ViewData["Title"] = "Exam Grade List";
+}
+
+<br />
+<div class="card" style="width:50%">
+    <div class="container p-6" style="width:100%">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-info">Exam Grade List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-info">@Model.Student.FullName</a>
+            </div>
+        </div>
+
+        <br />
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:20%">Course</th>
+                    <th style="width:20%">Mid1</th>
+                    <th style="width:20%">Mid2</th>
+                    <th style="width:5%">Final</th>
+                </tr>
+            </thead>
+
+            @foreach (var grade in Model.ExamGradeList)
+            {
+                <tr>
+                    <td>
+                        @Model.CourseList.FirstOrDefault(c => c.Id == grade.CourseId)?.FullName
+                    </td>
+                    <td>@grade.Mid1</td>
+                    <td>@grade.Mid2</td>
+                    <td>@grade.Final</td>
+                </tr>
+            }
+        </table>
+        <div class="col-12 mb-2 mt-4">
+            <a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
+    </div> 
+</div>

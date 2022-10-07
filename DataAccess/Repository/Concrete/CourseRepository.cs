@@ -4,7 +4,7 @@ using Models.Concrete;
 
 namespace DataAccess.Repository.Concrete
 {
-    public class CourseRepository : Repository<Course>, ICourseRepository
+    public class CourseRepository : RepositoryBase<Course>, ICourseRepository
     {
         private readonly SchoolDbContext _db;
 

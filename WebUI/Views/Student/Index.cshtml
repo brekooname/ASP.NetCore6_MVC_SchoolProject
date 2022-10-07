@@ -25,6 +25,7 @@
                     <th style="width:20%">Last Name</th>
                     <th style="width:15%">Username</th>
                     <th style="width:15%">Password</th>
+                    <th style="width:5%">Grades</th> 
                     <th style="width:5%">Edit</th>
                     <th style="width:5%">Delete</th>
                 </tr>
@@ -38,6 +39,7 @@
                     <td>@s.LastName</td>
                     <td>@s.UserName</td>
                     <td>@s.Password</td>
+                    <td><a href="/Grade/GetListByStudentId/@s.Id" class="btn btn-secondary" style="width:20px"></a></td>
                     <td><a href="/Student/Edit/@s.Id" class="btn btn-primary" style="width:20px"></a></td>
                     <td><a href="/Student/Delete/@s.Id" class="btn btn-danger" style="width:20px"></a></td>
                 </tr>

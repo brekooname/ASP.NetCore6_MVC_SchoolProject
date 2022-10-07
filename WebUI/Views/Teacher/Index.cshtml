@@ -38,7 +38,7 @@
                     <td>@teacher.UserName</td>
                     <td>@teacher.Password</td>
                     <td>
-                        @Model.CourseList.FirstOrDefault(c => c.Id == teacher.CourseId)?.ToString()
+                        @Model.CourseList.FirstOrDefault(c => c.Id == teacher.CourseId)?.FullName
                     </td>
                     <td><a href="/Teacher/Edit/@teacher.Id" class="btn btn-primary" style="width:20px"></a></td>
                     <td><a href="/Teacher/Delete/@teacher.Id" class="btn btn-danger" style="width:20px"></a></td>

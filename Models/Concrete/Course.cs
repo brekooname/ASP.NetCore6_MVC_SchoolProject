@@ -1,4 +1,6 @@
-﻿namespace Models.Concrete
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Models.Concrete
 {
     public class Course
     {
@@ -15,9 +17,7 @@
         public ICollection<Student> Students { get; set; }
         public ICollection<ExamGrade> ExamGrades { get; set; }
 
-        public override string? ToString()
-        {
-            return $"{Name} {Code}";
-        }
+        [NotMapped]
+        public string FullName { get => $"{Name} {Code}"; }
     }
 }

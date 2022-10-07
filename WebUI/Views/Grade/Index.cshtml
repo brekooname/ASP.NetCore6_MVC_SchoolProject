@@ -1,0 +1,46 @@
+﻿@model ExamGradeFullViewModel
+
+@{
+    ViewData["Title"] = "ExamGrade List";
+}
+
+<br />
+<div class="card">
+    <div class="container p-6">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-info">Exam Grade List</h2>
+            </div>
+        </div>
+        <br />
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:20%">Student</th>
+                    <th style="width:20%">Teacher</th>
+                    <th style="width:20%">Course</th>
+                    <th style="width:10%">Mid1</th>
+                    <th style="width:10%">Mid2</th>
+                    <th style="width:10%">Final</th>
+                </tr>
+            </thead>
+
+            @foreach (var examGrade in Model.ExamGradeList)
+            {
+                <tr>
+                    <td>@Model.StudentList.FirstOrDefault(s => s.Id == examGrade.StudentId)?.FullName </td>
+                    <td>@Model.TeacherList.FirstOrDefault(t => t.Id == examGrade.TeacherId)?.FullName </td>
+                    <td>@Model.CourseList.FirstOrDefault(c => c.Id == examGrade.CourseId)?.FullName </td>
+                    <td>@examGrade.Mid1</td>
+                    <td>@examGrade.Mid2</td>
+                    <td>@examGrade.Final</td>
+                </tr>
+            }
+        </table>
+
+        <div class="col-12"> 
+            <a asp-controller="Student" asp-action="Index" class="btn btn-danger" style="width:150px">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Repository.Concrete
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class RepositoryBase<T> : IRepository<T> where T : class
     {
         private readonly SchoolDbContext _db;
         internal DbSet<T> _dbSet;
-        public Repository(SchoolDbContext db)
+        public RepositoryBase(SchoolDbContext db)
         {
             _db = db; 
             _dbSet = _db.Set<T>();

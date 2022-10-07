@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Concrete
 {
@@ -20,5 +21,8 @@ namespace Models.Concrete
         public ICollection<Course> Courses { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
         public ICollection<ExamGrade> ExamGrades { get; set; }
+
+        [NotMapped]
+        public string FullName { get => $"{Name} {LastName}"; }
     }
 }
