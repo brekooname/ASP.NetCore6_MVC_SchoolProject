@@ -20,6 +20,7 @@ namespace WebUI.Controllers
             var studentList = _unitOfWork.StudentRepository.GetAll();
             return View(studentList);
         }
+
         #region Add => GET - POST
         public IActionResult Add()
         {
@@ -32,7 +33,10 @@ namespace WebUI.Controllers
             {
                 _unitOfWork.StudentRepository.Add(student);
                 await _unitOfWork.SaveAsync();
+                TempData["success"] = "Student Added Successfully";
+                return RedirectToAction(nameof(Index));
             }
+            TempData["error"] = "Process Failed";
             return RedirectToAction(nameof(Index));
         }
         #endregion
@@ -49,6 +53,7 @@ namespace WebUI.Controllers
         {
             _unitOfWork.StudentRepository.Update(student);
             await _unitOfWork.SaveAsync();
+            TempData["success"] = "Student Updated Successfully";
             return RedirectToAction(nameof(Index));
         }
         #endregion
@@ -65,12 +70,10 @@ namespace WebUI.Controllers
         {
             _unitOfWork.StudentRepository.Remove(student);
             await _unitOfWork.SaveAsync();
+            TempData["success"] = "Student Removed Successfully";
             return RedirectToAction(nameof(Index));
         }
         #endregion
-
-
-
 
     }
 }

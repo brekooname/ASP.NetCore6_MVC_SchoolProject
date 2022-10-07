@@ -1,0 +1,46 @@
+﻿@model TeacherListViewModel
+
+@{
+    ViewData["Title"] = "Teacher List";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-info">Teacher List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Teacher" asp-action="Add" class="btn btn-info">Add New Teacher</a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr> 
+                <th style="width:20%">Name</th>
+                <th style="width:20%">Last Name</th>
+                <th style="width:15%">Username</th>
+                <th style="width:15%">Password</th>
+                <th style="width:15%">Course</th> 
+                <th style="width:5%">Edit</th>
+                <th style="width:5%">Delete</th>
+            </tr>
+        </thead>
+
+        @foreach (var teacher in Model.TeacherList)
+        {           
+            <tr>
+                <td>@teacher.Name</td>
+                <td>@teacher.LastName</td>
+                <td>@teacher.UserName</td>
+                <td>@teacher.Password</td>
+                <td>
+                    @Model.CourseList.FirstOrDefault(c => c.Id == teacher.CourseId)?.ToString()
+                </td> 
+                <td><a href="/Teacher/Edit/@teacher.Id" class="btn btn-primary" style="width:20px"></a></td>
+                <td><a href="/Teacher/Delete/@teacher.Id" class="btn btn-danger" style="width:20px"></a></td>
+            </tr>
+        }
+    </table>
+</div> 
